@@ -1,0 +1,37 @@
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        int k=find(str);
+        System.out.println(k);
+    }
+    public static int find(String str)
+    {
+        Stack<Character> s=new Stack<>();
+        int c=0;
+        for(int i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)=='(')
+             s.push('(');
+            else if(str.charAt(i)==')')
+            {
+                try
+                {
+                   if(s.peek()=='(')
+                   {
+                       c+=2;
+                       s.pop();
+                   }
+                } 
+                catch(Exception e) 
+                {
+                    continue;
+                } 
+            }
+        }
+        return c;
+    }
+}
