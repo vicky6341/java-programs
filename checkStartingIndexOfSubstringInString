@@ -1,0 +1,52 @@
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc1=new Scanner(System.in);
+        Scanner sc2=new Scanner(System.in);
+        String s=sc1.nextLine();
+        int n=sc2.nextInt();
+        String[] str=new String[n];
+        for(int i=0;i<n;i++)
+         str[i]=sc1.nextLine();
+        find(s,str);
+    }
+    public static void find(String s,String[] str)
+    {
+        int n=str[0].length();
+        for(int i=0;i<=(s.length()-(str.length*n));i++)
+        {
+            HashMap<String,Integer> h=new HashMap<String,Integer>();
+            for(int j=0;j<str.length;j++)
+               h.put(str[j],h.getOrDefault(str[j],0)+1);
+            int kp=check(s,i,i+((str.length*n)-1),n,h);
+            if(kp!=-1)
+             System.out.print(kp+" ");
+        }
+    }
+    public static int check(String s,int p,int q,int r,HashMap<String,Integer> h)
+    {
+        for(int i=p;i<=q;)
+        {
+            String res="";
+            int k=0;
+            while(k<r)
+            {
+                res=res+s.charAt(i);
+                i+=1;
+                k+=1;
+            }
+            if(h.containsKey(res))
+             h.put(res,h.get(res)-1);
+            else 
+             return -1;
+        }
+        for(Map.Entry<String,Integer> e:h.entrySet())
+        {
+            if(e.getValue()!=0)
+             return -1;
+        }
+        return p;
+    }
+}
