@@ -1,0 +1,24 @@
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        findPermut(str,"");
+    }
+    public static void findPermut(String s,String res)
+    {
+        if(s.length()==0)
+        {
+            System.out.print(res+" ");
+            return ;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            char ch=s.charAt(i);
+            String ans=s.substring(0,i)+s.substring(i+1);
+            findPermut(ans,res+ch);
+        }
+    }
+}
