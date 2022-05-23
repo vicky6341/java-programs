@@ -1,0 +1,71 @@
+import java.util.*;
+class Main 
+{
+    public static int c=0;
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] a=new int[n];
+        for(int i=0;i<n;i++)
+         a[i]=sc.nextInt();
+        find(a);
+        System.out.println(c);
+    }
+    public static void find(int[] a)
+    {
+        int l=0;
+        int ap=0,b=0,p=0,q=0;
+        int i=0,max=0;
+        while(i<a.length)
+        {
+            if(!isPerfect(a[i]))
+            {
+                if(l==0)
+                {
+                  p=i;
+                  l+=1;
+                  q=i;
+                }
+                else
+                {
+                    q+=1;
+                    l+=1;
+                }
+            }
+            else
+            {
+                l=0;
+            }
+            if(l>max)
+            {
+                ap=p;
+                b=q;
+                max=l;
+            }
+            i+=1;
+        }
+        if(l==0)
+         return;
+        modify(a,ap,b);
+    }
+    public static boolean isPerfect(int n)
+    {
+        double d=Math.sqrt(n);
+        return (d-Math.floor(d)==0);
+    }
+    public static void modify(int[] a,int p,int q)
+    {
+     for(int i=p;i<=q;i++)
+     {
+      a[i]=a[i]+1;
+     }
+     c+=1;
+     for(int i=p;i<=q;i++)
+     {
+         if(isPerfect(a[i]))
+          break;
+     }
+     find(a);   
+    }
+}
